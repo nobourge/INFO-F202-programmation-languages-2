@@ -75,6 +75,7 @@ class Range{
 		int operator *(){return index;}
 		Iterator &operator++(){index+=step;return *this;}
 		bool operator ==(const Iterator&I)const{return index==I.index;}
+		bool operator !=(const Iterator&I)const{return index!=I.index;}
 	};
 public:
 	Range(int stop):start{0},stop{stop},step{1}{}
@@ -151,13 +152,17 @@ void demo4(){
 //-- Q5
 
 class Count {
+//	static int count;
 	static int count;
-	int myCount=0;
+//	int myCount=0;
+	static int myCount;
 public:
 	Count() {myCount=count++;}
-	int get() const {return myCount;}
+//    int get() const {return myCount;}
+	static int get()  {return myCount;}
 };
 int Count::count=0;
+int Count::myCount=0;
 
 
 class Point : public Count {
@@ -182,10 +187,10 @@ public:
 
 void demo5(){
 	ColoredPoint cp{1,2,3,4,5};
-	//cout<<cp.get(); 
-	cout<<cp.Point::get()<<endl;
+	cout<<cp.get() <<endl;
+	cout<<"cp.Point::get()" <<cp.Point::get()<<endl;
 	cout<<cp.Color::get()<<endl; 
-	//cout<<cp.Count::get()<<endl; 
+//	cout<<cp.Count::get()<<endl;
 	cout<<cp.description()<<endl;
 	Point *p=&cp;
 	cout<<p->description()<<endl;
