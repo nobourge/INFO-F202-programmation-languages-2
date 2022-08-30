@@ -165,14 +165,16 @@ int Count::count=0;
 int Count::myCount=0;
 
 
-class Point : public Count {
+//class Point : public Count { // Count is a base class inherited by Point and Color -> ambiguous
+class Point : virtual public Count {
 	int x,y;
 public:
 	Point(int x,int y):x{x},y{y}{};
 	string description() const {return to_string(x)+" "+to_string(y);}
 };
 
-class Color : public Count {
+//class Color : public Count { // Count is a base class inherited by Point and Color -> ambiguous
+class Color : virtual public Count {
 	int r,g,b;
 public:
 	Color(int r,int g,int b):r{r},g{g},b{b}{}
@@ -187,10 +189,15 @@ public:
 
 void demo5(){
 	ColoredPoint cp{1,2,3,4,5};
-	cout<<cp.get() <<endl;
+//	cout<< cp.get() <<endl;
+// Count is a base class inherited by Point and Color -> ambiguous
+//  myCount is not static
+	cout<< "cp.get()" << cp.get() <<endl;
 	cout<<"cp.Point::get()" <<cp.Point::get()<<endl;
 	cout<<cp.Color::get()<<endl; 
 //	cout<<cp.Count::get()<<endl;
+// Count is a base class inherited by Point and Color -> ambiguous
+	cout<<"cp.Count::get()" << cp.Count::get()<<endl;
 	cout<<cp.description()<<endl;
 	Point *p=&cp;
 	cout<<p->description()<<endl;
