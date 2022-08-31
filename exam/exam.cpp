@@ -152,17 +152,21 @@ void demo4(){
 //-- Q5
 
 class Count {
-//	static int count;
-	static int count;
-//	int myCount=0;
-	static int myCount;
+	 int count = 0;
+	int myCount=0;
 public:
-	Count() {myCount=count++;}
-//    int get() const {return myCount;}
-	static int get()  {return myCount;}
+	Count() {
+      cout<<"Count()"<<endl;
+      cout<<"count="<<count<<endl;
+
+      cout<<"myCount="<<myCount<<endl;
+      cout<<"myCount=++count"<<endl;
+      myCount=++count;
+      cout<<"count="<<count<<endl;
+      cout<<"myCount="<<myCount<<endl;
+    }
+    int get() const {return myCount;}
 };
-int Count::count=0;
-int Count::myCount=0;
 
 
 //class Point : public Count { // Count is a base class inherited by Point and Color -> ambiguous
@@ -192,15 +196,15 @@ void demo5(){
 //	cout<< cp.get() <<endl;
 // Count is a base class inherited by Point and Color -> ambiguous
 //  myCount is not static
-	cout<< "cp.get()" << cp.get() <<endl;
-	cout<<"cp.Point::get()" <<cp.Point::get()<<endl;
-	cout<<cp.Color::get()<<endl; 
+	cout<< "cp.get() : " << cp.get() <<endl;
+	cout<<"cp.Point::get() : " <<cp.Point::get()<<endl;
+	cout<< "cp.Color::get() : " << cp.Color::get()<<endl;
 //	cout<<cp.Count::get()<<endl;
 // Count is a base class inherited by Point and Color -> ambiguous
-	cout<<"cp.Count::get()" << cp.Count::get()<<endl;
-	cout<<cp.description()<<endl;
+	cout<<"cp.Count::get() : " << cp.Count::get()<<endl;
+	cout<< "cp.description() : " << cp.description()<<endl;
 	Point *p=&cp;
-	cout<<p->description()<<endl;
+	cout<< "p->description() : " << p->description()<<endl;
 }
 
 //-----------------
